@@ -33,8 +33,33 @@
 @media(max-width:760px){.site-header .nav{padding:14px 18px;gap:15px;flex-wrap:wrap}.site-header .brand{flex:1 1 100%;font-size:20px}.site-header .navlinks{flex:1 1 auto;justify-content:flex-start;gap:16px}.site-header .navlinks a{font-size:11px}.site-header .call{font-size:11px;padding:9px 13px}.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.opening-title{font-size:clamp(24px,9vw,65px)}.opening-discount{font-size:clamp(18px,7vw,50px)}.opening-tag{font-size:clamp(8px,2.3vw,15px)}}
 @media(max-width:440px){.site-header .navlinks{gap:12px}.site-header .navlinks a{font-size:10px}.shop-grid{grid-template-columns:1fr}.site-header .call{margin-left:auto}.opening-title{font-size:9vw}}
 
-/* Exact user-supplied logo file is displayed without recoloring, redrawing or cropping. */
-.hero-original-logo{position:absolute;left:3.2%;top:2.0%;width:32.5%;aspect-ratio:1047/781;background:#fff;z-index:2;line-height:0}
-.hero-original-logo img{width:100%;height:100%;object-fit:contain;display:block}
-.vial-label{background:#111;padding:6%;}
-.vial-label img{background:#fff;object-fit:contain;display:block;width:100%;height:auto;max-height:100%}
+/* Exact user-supplied logo; image pixels are never redrawn or recolored. */
+.hero-original-logo {
+  position:absolute;
+  left:2.5%;
+  top:2.2%;
+  width:34%;
+  height:17%;
+  background:#f5f0e5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  z-index:2;
+}
+.hero-original-logo img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.vial-label {
+  padding:0;
+  background:#fff;
+  border-radius:3%;
+}
+.vial-label img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
