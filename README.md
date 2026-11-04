@@ -1,32 +1,38 @@
-# VITAL HOUSE — MODULAR WEBSITE / OPTION A
+# Vital House | Faithful Four-Panel Website
 
-This is a complete static website for GitHub Pages. Its design follows the approved cream + neon-yellow + turquoise + black mockups.
+This is a working static website built from the four-panel mockup. The screenshot is a visual reference, **not** a flattened webpage background. Every page uses real responsive HTML/CSS, functioning navigation, separate reusable assets, and local JavaScript for the catalog and inquiry cart.
 
-## How to upload
-1. Unzip this archive on your computer.
-2. Open your Vital House GitHub Pages repository.
-3. Select Add file > Upload files.
-4. Drag the individual extracted files into the repository root, not a nested folder. Do not upload this ZIP as a single file.
-5. Commit the changes. GitHub Pages may take a short time to publish; refresh the site after deployment.
+## Deploy to GitHub Pages
 
-Keep the repository and GitHub Pages Settings intact. The included CNAME file must remain in the repository to preserve www.vitalhouse.org.
+1. Extract the ZIP.
+2. Open https://github.com/VitalHouse/Vital-House.
+3. Choose Add file > Upload files.
+4. Upload the actual files from inside this folder to the **repository root**. Do not upload the ZIP or wrap files inside a second folder.
+5. Commit. Keep the included `CNAME` containing `www.vitalhouse.org`.
+6. Check the live domain using a fresh private/incognito tab after GitHub Pages has deployed.
 
-## Structure
-- index.html — Home
-- catalog.html — Research Catalog
-- shop.html — Shop/inquiry price listings (15 products)
-- cart.html — Nonbinding inquiry cart, estimates, and prepared email
-- policies.html — research-use, privacy and terms information
-- styles.css — shared responsive styling
-- app.js — product list, 25% discount, cart, Nevada county estimated tax calculations, email preparation
-- vital-house-logo-master.png — your EXACT untouched original logo file
-- vital-house-logo-display.png — background-transparent display copy with the exact same logo artwork; no redrawing or change to logo proportions
-- vial-shell.svg — reusable clear-glass and black-and-gold vial artwork WITHOUT an embedded logo
-- grand-opening-lettering.png — isolated decorative headline, separate from the logo
-- community.png — lifestyle image used on homepage
-- DESIGN-ASSETS.md — details on editing modular assets
+## Website pages
 
-## Important
-This site DOES NOT accept payments, create legal orders, or transmit an inquiry by itself. Pressing Prepare Inquiry Email opens the visitor's email program with a prefilled message, which the visitor must send; Copy Inquiry is a fallback.
+- `index.html` — Home / Grand Opening
+- `catalog.html` — Research Catalog
+- `shop.html` — Shop listing and 25% displayed discounts
+- `cart.html` — Editable inquiry cart, quantity steppers, estimated county sales tax, and email inquiry
+- `policies.html` — Research notices and privacy statements
 
-Sales-tax results are estimates, not a guarantee of tax owed. The user must review actual rates, taxability, location, shipping, lawful product availability, and legal/regulatory requirements before accepting any transaction. Research-use disclaimers alone do not authorize sale of restricted or unapproved products.
+## Modular assets: do not remake the logo
+
+- `brand-logo-original.jpg` — **unaltered, exact original user-supplied logo**; do not edit or replace with a generated logo.
+- `brand-logo-display.png` — display transparency derived from the original's white background, without changing shape or typography; it is used for every logo on pages and the illustrated vial labels.
+- `vial-shell.svg` — standalone clear-glass vial drawing, with no logo embedded. The actual brand logo overlays it in HTML, making logo updates independent of the vial artwork.
+- `grand-opening-lettering.png` — standalone Grand Opening lettering (black script, transparent background).
+- `paper-texture.jpg` and `community-photo.jpg` — background texture and lifestyle photo assets.
+- `style.css` — site-wide visual design.
+- `site.js` — products, 25% discount, dynamic cart, Nevada county rate estimates, and nonbinding email inquiry.
+
+## Important limitations
+
+This GitHub Pages site cannot send email automatically: the Send Inquiry button opens the customer's email program and the customer must press Send. The Copy Inquiry fallback is also provided. The website collects no payments and no card data.
+
+Rates, shipping, product eligibility, research-use notices and legally permissible distribution must be independently reviewed before launch. In particular, research-use disclaimers alone do not authorize the distribution or sale of unapproved drugs. Do not rely on the estimated county tax rate for tax filing.
+
+The source mockup is a 4-column image of four narrow poster-style pages. Each functional page is therefore deliberately centered and poster-proportioned on wide desktop screens, and fills mobile screens. This maximizes its resemblance to the original mockup.

@@ -1,30 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 280 470" role="img" aria-label="Clear glass vial with black and gold Vital House label">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 270" aria-hidden="true">
  <defs>
-  <linearGradient id="glass" x1="0" x2="1"><stop offset="0" stop-color="#c4a477" stop-opacity=".55"/><stop offset=".095" stop-color="#fffaf2" stop-opacity=".9"/><stop offset=".19" stop-color="#bac6ca" stop-opacity=".4"/><stop offset=".45" stop-color="#e9ddce" stop-opacity=".11"/><stop offset=".7" stop-color="#c9a46b" stop-opacity=".22"/><stop offset=".85" stop-color="#f8fafb" stop-opacity=".88"/><stop offset="1" stop-color="#604a39" stop-opacity=".6"/></linearGradient>
-  <linearGradient id="liquid" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#c68622" stop-opacity=".16"/><stop offset=".7" stop-color="#c68622" stop-opacity=".28"/><stop offset="1" stop-color="#6f4617" stop-opacity=".48"/></linearGradient>
-  <linearGradient id="cap" x1="0" x2="1"><stop stop-color="#535456"/><stop offset=".14" stop-color="#eeeef0"/><stop offset=".3" stop-color="#abaeb2"/><stop offset=".54" stop-color="#fbfbfa"/><stop offset=".77" stop-color="#85898e"/><stop offset=".94" stop-color="#e2e2df"/><stop offset="1" stop-color="#45494d"/></linearGradient>
-  <linearGradient id="blacklabel" x1="0" x2="1"><stop stop-color="#101010"/><stop offset=".12" stop-color="#272420"/><stop offset=".28" stop-color="#11100f"/><stop offset=".75" stop-color="#080808"/><stop offset=".9" stop-color="#27221b"/><stop offset="1" stop-color="#080808"/></linearGradient>
-  <linearGradient id="gold" x1="0" x2="1"><stop stop-color="#a47121"/><stop offset=".18" stop-color="#f4d88a"/><stop offset=".48" stop-color="#ca9028"/><stop offset=".76" stop-color="#f1cf68"/><stop offset="1" stop-color="#a36b19"/></linearGradient>
-  <filter id="sh"><feGaussianBlur stdDeviation="7"/></filter>
-  <filter id="glassshine"><feGaussianBlur stdDeviation="3"/></filter>
+  <linearGradient id="glass" x1="0" x2="1"><stop stop-color="#45331d"/><stop offset=".075" stop-color="#fff2c7"/><stop offset=".14" stop-color="#946d31"/><stop offset=".28" stop-color="#d7aa58"/><stop offset=".45" stop-color="#503921"/><stop offset=".65" stop-color="#c99745"/><stop offset=".8" stop-color="#f3d9a1"/><stop offset=".91" stop-color="#75522a"/><stop offset="1" stop-color="#1e160e"/></linearGradient>
+  <linearGradient id="glassoverlay" x1="0" x2="1"><stop stop-color="#fff" stop-opacity=".7"/><stop offset=".12" stop-color="#fff" stop-opacity="0"/><stop offset=".85" stop-color="#fff" stop-opacity=".02"/><stop offset=".93" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <linearGradient id="foil" x1="0" x2="1"><stop stop-color="#242728"/><stop offset=".12" stop-color="#d8d9d7"/><stop offset=".26" stop-color="#656a6b"/><stop offset=".42" stop-color="#fdfcf4"/><stop offset=".55" stop-color="#aaa9a4"/><stop offset=".68" stop-color="#fbf9ef"/><stop offset=".86" stop-color="#727475"/><stop offset="1" stop-color="#25282b"/></linearGradient>
+  <linearGradient id="rim" x1="0" x2="1"><stop stop-color="#54410f"/><stop offset=".4" stop-color="#ecc34a"/><stop offset=".7" stop-color="#705215"/><stop offset="1" stop-color="#d8a83e"/></linearGradient>
+  <linearGradient id="label" x1="0" x2="1"><stop stop-color="#15120e"/><stop offset=".16" stop-color="#252019"/><stop offset=".45" stop-color="#050505"/><stop offset=".8" stop-color="#191510"/><stop offset="1" stop-color="#050402"/></linearGradient>
+  <linearGradient id="plaque" x1="0" x2="1"><stop stop-color="#ab791c"/><stop offset=".22" stop-color="#ffe178"/><stop offset=".58" stop-color="#d69c28"/><stop offset=".83" stop-color="#f5cf62"/><stop offset="1" stop-color="#855614"/></linearGradient>
+  <filter id="shade" x="-50%" y="-30%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
  </defs>
- <ellipse cx="141" cy="451" rx="97" ry="12" fill="#33271d" opacity=".26" filter="url(#sh)"/>
- <path d="M92 98H188V119Q189 129 203 134Q219 141 220 162V415Q220 441 196 441H84Q60 441 60 415V162Q60 141 76 134Q91 129 92 119Z" fill="url(#liquid)" stroke="#a79780" stroke-width="3"/>
- <path d="M92 98H188V119Q189 129 203 134Q219 141 220 162V415Q220 441 196 441H84Q60 441 60 415V162Q60 141 76 134Q91 129 92 119Z" fill="url(#glass)" stroke="#ebe1cf" stroke-width="3" opacity=".92"/>
- <path d="M73 174V411Q73 424 82 430" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".7" filter="url(#glassshine)"/>
- <path d="M202 164V424" fill="none" stroke="#fffaf2" stroke-width="5" stroke-linecap="round" opacity=".53"/>
- <rect x="90" y="82" width="100" height="52" rx="12" fill="url(#glass)" stroke="#b5b2aa" stroke-width="3"/>
- <rect x="79" y="57" width="122" height="65" rx="15" fill="url(#cap)" stroke="#55595d" stroke-width="3"/>
- <rect x="84" y="54" width="112" height="13" rx="5" fill="#cacdd0" stroke="#545454" stroke-width="2"/>
- <path d="M90 67V115M99 67V115M182 67V115M192 67V115" stroke="#f9f9f8" stroke-opacity=".5" stroke-width="3"/>
- <rect x="80" y="215" width="122" height="178" rx="8" fill="url(#blacklabel)" stroke="#b98b45" stroke-width="2.5"/>
- <rect x="81" y="215" width="120" height="8" fill="url(#gold)"/>
- <rect x="81" y="385" width="120" height="8" fill="url(#gold)"/>
- <rect x="96" y="235" width="90" height="76" rx="3" fill="url(#gold)" />
- 
- 
- 
- <path d="M90 376H192" stroke="#b8954a" stroke-width=".7" opacity=".5"/>
- <rect x="69" y="170" width="6" height="222" rx="3" fill="white" opacity=".12"/>
- <rect x="208" y="170" width="3" height="232" rx="1.5" fill="white" opacity=".15"/>
- </svg>
+ <ellipse cx="71" cy="256" rx="57" ry="8" opacity=".24" fill="#26201b" filter="url(#shade)"/>
+ <!-- neck and full glass flask -->
+ <path d="M44 43H96V60Q96 71 107 77Q121 84 121 99V232Q121 251 107 251H33Q19 251 19 232V99Q19 85 33 77Q44 70 44 60Z" fill="url(#glass)" stroke="#695334" stroke-width="2"/>
+ <path d="M45 54H95V64Q98 75 108 79Q118 88 118 99V231Q118 246 106 247H34Q22 246 22 231V99Q22 88 33 79Q42 74 45 64Z" fill="url(#glassoverlay)" opacity=".75"/>
+ <path d="M26 100v133q0 10 8 11" fill="none" stroke="#fff2c6" stroke-width="4" opacity=".52"/><path d="M114 101v131" stroke="#faf4dc" stroke-width="2" opacity=".48"/>
+ <rect x="43" y="44" width="54" height="31" rx="6" fill="url(#foil)" stroke="#4a4b47" stroke-width="1.5"/>
+ <rect x="31" y="16" width="78" height="43" rx="10" fill="url(#foil)" stroke="#262728" stroke-width="2"/>
+ <path d="M37 17H103Q106 17 106 20V27H34V20Q34 17 37 17Z" fill="#272727" opacity=".92"/><path d="M36 49H104" stroke="#fff" opacity=".6" stroke-width="2"/>
+ <rect x="33" y="78" width="74" height="9" rx="2" fill="url(#rim)" opacity=".65"/>
+ <!-- black-and-gold product label; LOGO LAYER IS EXTERNAL HTML IMAGE -->
+ <rect x="24" y="100" width="92" height="136" rx="3" fill="url(#label)" stroke="#d5aa50" stroke-width="1"/>
+ <rect x="26" y="100" width="88" height="5" fill="url(#plaque)"/>
+ <rect x="26" y="231" width="88" height="5" fill="url(#plaque)"/>
+ <rect x="39" y="113" width="62" height="67" rx="2" fill="url(#plaque)"/>
+ <path d="M27 106V231" stroke="#fff5d3" stroke-opacity=".18" stroke-width="2"/>
+ <path d="M111 106V231" stroke="#fff5d3" stroke-opacity=".15" stroke-width="2"/>
+</svg>
