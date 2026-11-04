@@ -30,3 +30,137 @@
   .catalog-row .compound{grid-column:2;grid-row:1;font-size:1.32rem}
   .catalog-row .description{grid-column:2;grid-row:2;margin:4px 0 0;line-height:1.45;font-size:.87rem;padding-left:12px}
 }
+
+/* === OPTION A: IMMUTABLE MASTER LOGO + MODULAR VIALS ===
+   Master artwork: vital-house-logo-master.png, an exact unchanged copy of the user-supplied image.
+   The vial artwork has NO built-in brand; the same master image sits in its own CSS slot. */
+.brand-logo { mix-blend-mode: multiply; width:100%; height:auto; display:block; }
+.vial { position:relative; display:block; aspect-ratio:280/470; container-type:inline-size; isolation:auto; }
+.vial .vial-shell { display:block; width:100%; height:100%; object-fit:contain; }
+.vial .vial-mark { position:absolute; left:35.25%; top:50.5%; width:29.6%; height:15.4%; object-fit:contain; mix-blend-mode:multiply; pointer-events:none; }
+.vial .vial-product { position:absolute; left:28%; width:44%; top:72.25%; text-align:center; font-size:5.25cqw; line-height:1; font-weight:900; color:#e1ba60; white-space:nowrap; font-family:Arial,Helvetica,sans-serif; letter-spacing:-.035em; pointer-events:none; }
+.vial .vial-dose { position:absolute; left:27%; width:46%; top:77.1%; text-align:center; font-size:4.6cqw; line-height:1.1; font-weight:800; color:#e1ba60; white-space:nowrap; font-family:Arial,Helvetica,sans-serif; pointer-events:none; }
+/* Preserve previous bottle placements — only change <img> to logo-driven <div>. */
+.hero-art .vial { position:absolute; z-index:3; width:clamp(155px,20vw,250px); height:auto; filter:drop-shadow(12px 14px 8px #2c241d33); }
+.hero-art .vial.vial-a { width:220px; left:16px; bottom:68px; }
+.hero-art .vial.vial-b { width:252px; left:177px; bottom:175px; }
+.hero-art .vial.vial-c { width:194px; right:-22px; bottom:22px; }
+.page-hero .vial-header .vial { position:absolute; width:140px; right:25px; bottom:-48px; filter:drop-shadow(6px 7px 4px #0002); }
+.page-hero .vial-header .vial:first-child { right:132px; width:111px; bottom:-65px; }
+.page-hero .vial-header .vial:last-child { right:-15px; width:95px; bottom:-72px; }
+.cart-line .vial { width:46px; min-width:46px; height:auto; align-self:center; }
+.cart-line .vial .vial-product,.cart-line .vial .vial-dose { display:none; }
+@media(max-width:1050px){
+ .page-hero .vial-header .vial { right:10px; }
+ .page-hero .vial-header .vial:first-child { right:100px; }
+ .page-hero .vial-header .vial:last-child { right:-32px; }
+}
+@media(max-width:760px){
+ .hero-art .vial.vial-a{width:170px;left:0;bottom:46px}
+ .hero-art .vial.vial-b{width:205px;left:calc(50% - 86px);bottom:98px}
+ .hero-art .vial.vial-c{width:155px;right:-12px;bottom:15px}
+ .cart-line .vial { width:35px; min-width:35px; }
+}
+@media(max-width:390px){
+ .hero-art .vial.vial-a{width:145px}
+ .hero-art .vial.vial-b{width:170px;left:calc(50% - 72px)}
+ .hero-art .vial.vial-c{width:126px}
+}
+
+
+
+/* === APPROVED MOCKUP FINISH — visual only; no logo pixels modified === */
+/* The white backdrop in the original logo optically disappears on paper using multiply. */
+.brand-logo,.vial .vial-mark { filter:none!important; mix-blend-mode:multiply!important; }
+.brand-logo { aspect-ratio:1047/781; object-fit:contain; }
+.logo-wrap { background:transparent!important; border:0!important; padding:0!important; box-shadow:none!important; }
+.site { background:#faf3e7; }
+.site::before { background-image:radial-gradient(#866e5133 .62px, transparent .9px);background-size:5px 5px;opacity:.31; }
+.header{height:72px; background:#fff9ee; border-bottom:1px solid #c9bfae; }
+.mast-name { font-family:'Arial Narrow',Arial,sans-serif;letter-spacing:-.065em; font-weight:900; font-size:clamp(1.25rem,2.3vw,1.95rem); }
+.nav-link { font-family:'Arial Narrow',Arial,sans-serif; font-weight:900; text-transform:uppercase; letter-spacing:-.03em; font-size:1.02rem; }
+.phone-pill { font-family:'Arial Narrow',Arial,sans-serif; font-size:.98rem; letter-spacing:-.025em; }
+.hero { padding-top:28px; }
+.hero-copy .logo-wrap{width:280px;max-width:36vw;margin-left:0;}
+.hero-copy .brand-tagline{font-size:1.02rem; letter-spacing:.04em; margin-top:-4px;}
+.hero-promo { margin-top:27px; }
+.hero-promo .brush { display:block;width:min(540px,100%);height:270px; transform:rotate(-4deg); }
+.hero-promo .brush::before { inset:10% -2% 2% -4%; transform:rotate(0) skewX(-7deg);clip-path:polygon(0 20%,91% 0,100% 10%,97% 17%,100% 27%,95% 37%,100% 51%,97% 67%,99% 82%,88% 92%,0 100%,4% 79%,0 64%,3% 39%);}
+.grand-lettering{position:absolute;width:100%;height:115%;object-fit:contain;top:-12%;left:-3%;z-index:2;filter:drop-shadow(1px 2px 0 #1111);}
+.hero-promo .discount {font-family:'Arial Black',Impact,sans-serif;font-style:italic;font-weight:900;transform:rotate(-7deg) skewX(-6deg);margin:12px 0 0 26px;font-size:clamp(3rem,6vw,5.75rem);padding:4px 35px 8px; clip-path:polygon(0 16%,96% 0,100% 9%,95% 25%,100% 43%,97% 70%,100% 94%,4% 100%,0 78%,3% 42%);box-shadow:none;text-shadow:1px 2px 0 #0009;}
+.hero-copy .research-line { margin:22px 0 18px 13px; font-weight:900; font-size:1.12rem;letter-spacing:.18em; }
+.hero-art { height:570px; }
+.hero-art .vial.vial-a { left:-1px;bottom:54px; }
+.hero-art .vial.vial-b { left:180px;bottom:159px; }
+.hero-art .vial.vial-c { right:-25px;bottom:12px; }
+.pedestal { box-shadow:inset -16px -8px 20px #87775c2b, 12px 11px 16px #5b4b3026; }
+.feature-band {padding:13px 0; }
+.feature {min-height:85px;}
+.feature svg {width:40px;height:40px;}
+.feature span {font-family:'Arial Narrow',Arial,sans-serif;font-size:1rem;font-weight:900;}
+.promo-lower { padding:24px 0 30px; }
+.call-panel {font-weight:900;}
+.page-hero { min-height:210px; }
+.page-hero .container { min-height:210px; }
+.page-hero .logo-wrap { width:135px; }
+.page-hero .brand-tagline {white-space:normal;margin-top:-3px;font-size:.6rem;letter-spacing:.01em;}
+.page-heading h1 {font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-style:italic;font-size:clamp(3.25rem,5.6vw,5.4rem);letter-spacing:-.075em;line-height:.93;}
+.page-heading h1 .brush::before{inset:-3% -5% -5% -4%;}
+.page-heading .promo-sash{font-family:'Arial Narrow',Arial,sans-serif;font-size:1.17rem;font-style:italic; font-weight:900;}
+.catalog-intro {padding:18px 0 6px;}
+.catalog-list{margin:14px 0 35px;}
+.catalog-row{min-height:54px;padding:11px 22px;}
+.catalog-row .compound{font-family:'Arial Narrow',Arial,sans-serif;font-size:1.55rem;font-weight:900;letter-spacing:-.06em;}
+.catalog-row .description{font-size:.89rem;}
+.shop-grid{gap:11px;padding-bottom:26px;}
+.product-card{padding:12px 10px 10px;gap:2px;border:1.2px solid #333;}
+.product-name{font-family:'Arial Narrow',Arial,sans-serif;font-weight:900;font-size:1.38rem;letter-spacing:-.04em;}
+.product-dose{font-size:.95rem;}
+.product-card .btn{padding:8px 8px;min-height:38px;}
+.product-card .qty-line{margin:5px auto 6px;}
+.product-card .price-line{margin:4px 0;}
+.price-now{font-size:1.27rem;}
+.shop-bottom{padding:15px 0 22px;}
+.footer{position:relative;border-top:3px solid #f7f400;}
+.footer::after{position:absolute;right:0;top:0;bottom:0;content:'';width:75px;background:repeating-linear-gradient(120deg,transparent 0 10px,#f7f400 11px 19px,transparent 20px 29px);clip-path:polygon(100% 0,100% 100%,0 100%);}
+.footer-name {font-weight:900;}
+/* Bottle graphics are separate glass SVGs. The original master logo remains a distinct image element. */
+.vial .vial-mark {left:35.4%; top:50.7%;width:29.2%; height:15.1%;}
+.vial .vial-product{top:72.25%;font-size:5cqw;}
+.vial .vial-dose{top:77.2%;font-size:4cqw;}
+@media(max-width:760px){
+ .header{min-height:66px;height:auto;}
+ .hero-copy .logo-wrap{max-width:100%;width:228px;margin:0 auto;}
+ .hero-promo{margin-top:8px;}
+ .hero-promo .brush{height:220px;margin:0 auto;width:min(430px,96%);}
+ .hero-promo .discount{font-size:clamp(2.7rem,11vw,5.2rem);margin:0 auto 13px;}
+ .hero-copy .research-line{margin:9px auto 12px;font-size:.92rem;}
+ .hero-art{height:410px;}
+ .page-hero .logo-wrap{width:103px;}
+ .page-heading h1{font-size:clamp(2.1rem,8vw,3.4rem);}
+ .catalog-intro{padding:13px 0 8px;}
+ .catalog-list{margin:8px 0 22px;}
+ .catalog-row{padding:10px 11px;}
+ .catalog-row .compound{font-size:1.2rem;}
+ .shop-grid{gap:7px;}
+ .footer::after{opacity:.4;width:34px;}
+}
+@media(max-width:390px){
+ .hero-promo .brush{height:188px;}
+ .hero-art{height:360px;}
+ .page-hero .logo-wrap{width:90px;}
+}
+
+/* The original unaltered artwork is in master.png; display.png is only its transparent-backed rasterization, with identical outlines. */
+.brand-logo,.vial .vial-mark {mix-blend-mode:normal!important;}
+/* Mobile catalog, shop, and cart are stacked like the approved tall-page mockup. */
+@media(max-width:760px){
+ .page-hero .container{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:0;padding-top:20px;padding-bottom:21px;}
+ .page-hero .logo-wrap{width:144px!important;max-width:44vw;}
+ .page-hero .brand-tagline{font-size:.62rem;}
+ .page-hero .page-heading{width:100%;text-align:center;}
+ .page-heading h1{font-size:clamp(2.55rem,9.4vw,3.65rem);margin:12px 0 14px;}
+ .page-heading h1 .brush{max-width:100%;}
+ .page-heading .promo-sash{font-size:clamp(.79rem,3.8vw,.99rem);max-width:100%;white-space:nowrap;}
+ .shop-toolbar{margin-top:14px;}
+}
