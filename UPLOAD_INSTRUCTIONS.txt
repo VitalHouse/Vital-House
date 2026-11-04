@@ -1,7 +1,22 @@
-Vital House GitHub update
+VITAL HOUSE — FIXED GITHUB PAGES UPLOAD
 
-Unzip and upload the CONTENTS of this folder (not the ZIP) to the ROOT of https://github.com/VitalHouse/Vital-House . Replace files with matching names, then commit.
+WHY THE LIVE SITE BROKE
+GitHub uploaded all images and products.json into the repository ROOT, but the prior website attempted to load assets/... paths. These were 404 Not Found.
 
-Homepage uses homepage-grand-opening.png as a single responsive image with clickable navigation, phone, and CTA hotspots. The Research Catalog and Shop remain the existing pages.
+THIS PACKAGE FIXES THAT BY PUTTING EVERY FILE IN ONE FOLDER, AND REWRITING THE WEB PAGES TO USE ROOT-RELATIVE FILE NAMES.
 
-Please preview on desktop and mobile after upload. The image contains baked-in text and graphics; future visual edits require editing the source image.
+WHAT TO DO
+1) Download the ZIP and unzip it on your computer.
+2) Open the resulting folder and select ALL files INSIDE it (NOT the containing folder).
+3) Go to https://github.com/VitalHouse/Vital-House on the main branch.
+4) Add file > Upload files; drag the selected files into the upload area.
+5) Verify that the upload list shows index.html, styles.css, app.js, products.json, real-vials.jpg, community.jpg, vital-house-logo-original.png etc. WITHOUT any subfolder prefix.
+6) Commit changes and refresh www.vitalhouse.org (try hard refresh Shift+Reload). No changes to DNS or CNAME.
+
+These files intentionally overwrite the original website filenames. Leave your existing CNAME file unchanged. Other old files in the repository can stay; they aren't referenced by the current site.
+
+Site pages: index.html, catalog.html, shop.html, cart.html, policies.html.
+The exact original logo image from your upload is preserved, pixel-for-pixel.
+The product data and shopping cart links work with filenames at the repository root.
+
+IMPORTANT: Mail inquiries open the customer's email app; customers must SEND the email themselves. Pricing and tax estimates are not final quotes. Legal and product-specific distribution eligibility need qualified review before selling regulated compounds.
