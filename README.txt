@@ -1,9 +1,13 @@
-VITAL HOUSE WEBSITE UPDATE — 2026-11-02
+VITAL HOUSE — FRESH GITHUB PAGES SITE
 
-Upload all files in this ZIP to the root of your existing GitHub Pages repository, replacing same-named files. Keep the domain/DNS settings unchanged.
+Upload the CONTENTS of this folder (not the ZIP itself) to the root of https://github.com/VitalHouse/Vital-House . Include the assets/ folder. GitHub Pages should use main branch / root. Keep the GitHub custom domain www.vitalhouse.org and its DNS settings unchanged.
 
-Pages: index.html (Home), catalog.html (Research Catalog), shop.html (Shop). Old early-access.html redirects to shop.html.
+Pages: index.html (Home), catalog.html, shop.html, cart.html, policies.html.
 
-Original homepage.png and logo-original.png are preserved. The Grand Opening promotion and vial labels are HTML/CSS overlays on the original image so the underlying artwork is unchanged. The logo-gold.png file uses the exact original logo silhouette recolored in gold.
+The original uploaded logo is included unchanged as assets/vital-house-logo-original.png. The bottle photo is cropped from the user-provided actual packaging photo. The lifestyle image is an illustrative, AI-generated image, not evidence of any product effect.
 
-IMPORTANT: The Shop is a non-transactional pricing preview, not an active checkout. Confirm product eligibility and regulatory compliance before selling or soliciting orders.
+The inquiry cart stores selections in the visitor browser (localStorage). The checkout prepares a mailto: email; the visitor must send it manually. It is not an order or payment system. Some mail clients limit email length; a copy-text fallback is provided.
+
+Clark County tax estimate is 8.375% and only calculated if explicitly selected. Other locations show tax pending confirmation. Taxability, exemption, and destination must be verified.
+
+Before publication: have legal counsel review product-specific distribution eligibility, privacy policy, claims, tax, terms, and shipping; verify inventory and pricing. No third-party testing or purity claims are made. The site does not verify laboratory credentials and must not be used as an authorization to sell restricted substances.
