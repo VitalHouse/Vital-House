@@ -1,40 +1,77 @@
+/* Self-contained catalog and cart: no fetch calls, external services, or payment collection. */
 'use strict';
-/* All product data is in this file. No external JSON, API, framework, or image folder is needed. */
-const PRODUCTS=[
- ['retatrutide','Retatrutide','30 mg',150,'A multi-target investigational peptide studied in research concerning metabolic signaling and energy balance.'],
- ['tirzepatide','Tirzepatide','30 mg',130,'A dual-receptor peptide studied in experimental metabolic and glucose-signaling research.'],
- ['wolverine','Wolverine','5/5 mg',80,'A two-peptide research blend; the specific components and composition should be verified before any laboratory work.'],
- ['nad','NAD+','1,000 mg',85,'A coenzyme studied in cellular redox processes and biochemical energy pathways.'],
- ['ghk','GHK-Cu','100 mg',50,'A copper-binding peptide investigated in cellular and extracellular matrix research.'],
- ['mt2','MT2','10 mg',50,'An investigational melanocortin-receptor peptide studied in laboratory models.'],
- ['klow','KLOW','80 mg',150,'A research blend name; compound identities and composition require verification.'],
- ['glutathione','Glutathione','1,500 mg',65,'A tripeptide examined in laboratory research on antioxidant and redox systems.'],
- ['mots','MOTS-C','10 mg',50,'A mitochondrial-derived peptide investigated in experimental metabolic models.'],
- ['ss31','SS-31','10 mg',65,'A mitochondria-targeting peptide studied in experimental cell models.'],
- ['tesamorelin','Tesamorelin','10 mg',100,'A peptide analog examined in receptor-signaling and biochemical research.'],
- ['selank','Selank','10 mg',40,'A synthetic peptide examined in experimental neuroscience studies.'],
- ['semax','Semax','10 mg',40,'A synthetic peptide investigated in experimental neurological models.'],
- ['pinealon','Pinealon','10 mg',50,'A short synthetic peptide studied in laboratory cellular research.'],
- ['igf1','IGF-1','1 mg',100,'A growth factor studied in cellular signaling and laboratory growth models.']
-].map(([id,name,size,price,description])=>({id,name,size,price,description}));
-const TAX_RATES={'Clark':0.08375,'Carson City':0.076,'Churchill':0.076,'Douglas':0.071,'Elko':0.071,'Esmeralda':0.0685,'Eureka':0.0685,'Humboldt':0.0685,'Lander':0.071,'Lincoln':0.071,'Lyon':0.071,'Mineral':0.0685,'Nye':0.076,'Pershing':0.071,'Storey':0.076,'Washoe':0.08265,'White Pine':0.07725};
-const STORAGE_KEY='vital-house-nonbinding-inquiry-cart-v2';
-const dollars=cents=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(cents/100);
-const cents=price=>Math.round(price*100);
-const promoPrice=p=>Math.round(cents(p.price)*0.75);
-function node(tag,cls,label){const n=document.createElement(tag);if(cls)n.className=cls;if(label!==undefined)n.textContent=label;return n}
-function readCart(){try{const v=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{}}catch{return {}}}
-function writeCart(cart){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(cart))}catch{}updateCartCount()}
-function quantity(cart,id){const n=Number(cart[id]);return Number.isFinite(n)?Math.max(0,Math.min(99,Math.floor(n))):0}
-function updateCartCount(){const c=readCart();const number=PRODUCTS.reduce((n,p)=>n+quantity(c,p.id),0);['cartCount','cartCountBottom'].forEach(id=>{const target=document.getElementById(id);if(target)target.textContent=number})}
-function initNavigation(){const page=document.body.dataset.page;document.querySelectorAll('.nav-links a').forEach(a=>{if(a.dataset.page===page){a.classList.add('active');a.setAttribute('aria-current','page')}});updateCartCount()}
-function renderCatalog(){const box=document.getElementById('catalogGrid');if(!box)return;const frag=document.createDocumentFragment();PRODUCTS.forEach(p=>{const article=node('article','catalog-card'),name=node('div'),h=node('h3','',p.name),size=node('small','',p.size),desc=node('p','',p.description);name.append(h,size);article.append(name,desc);frag.append(article)});box.replaceChildren(frag)}
-function renderShop(){const box=document.getElementById('shopGrid');if(!box)return;const frag=document.createDocumentFragment();PRODUCTS.forEach(p=>{const card=node('article','product-card'),title=node('h3','',p.name),size=node('div','size',p.size),prices=node('div','prices'),old=node('del','',dollars(cents(p.price))),now=node('strong','',dollars(promoPrice(p))),controls=node('div','controls'),label=node('label','qty-label','QTY'),qty=node('input','qty'),btn=node('button','btn-add','ADD TO CART');qty.type='number';qty.min='1';qty.max='99';qty.step='1';qty.value='1';qty.id='qty-'+p.id;label.htmlFor=qty.id;btn.type='button';btn.addEventListener('click',()=>{const n=Number(qty.value);if(!Number.isInteger(n)||n<1||n>99){qty.setCustomValidity('Choose a whole-number quantity from 1 to 99.');qty.reportValidity();return}qty.setCustomValidity('');const cart=readCart();cart[p.id]=Math.min(99,quantity(cart,p.id)+n);writeCart(cart);btn.textContent='ADDED ✓';btn.classList.add('just-added');setTimeout(()=>{btn.textContent='ADD TO CART';btn.classList.remove('just-added')},1100)});prices.append(old,now);controls.append(label,qty,btn);card.append(title,size,prices,controls);frag.append(card)});box.replaceChildren(frag)}
-function getCartItems(){const cart=readCart();return PRODUCTS.filter(p=>quantity(cart,p.id)>0).map(p=>({...p,qty:quantity(cart,p.id)}))}
-function getTotals(){const items=getCartItems();const original=items.reduce((s,p)=>s+cents(p.price)*p.qty,0);const subtotal=items.reduce((s,p)=>s+promoPrice(p)*p.qty,0);const discount=original-subtotal;const region=document.getElementById('taxRegion')?.value||'Clark';const rate=TAX_RATES[region];const tax=rate===undefined?null:Math.round(subtotal*rate);return {items,original,subtotal,discount,region,tax,rate,total:tax===null?null:subtotal+tax}}
-function renderCart(){const root=document.getElementById('cartItems');if(!root)return;const totals=getTotals();root.replaceChildren();if(!totals.items.length){const empty=node('div','cart-empty');empty.append(node('p','','Nothing in your inquiry cart yet.'));const link=node('a','pill pill-yellow','BROWSE SHOP →');link.href='shop.html';empty.append(link);root.append(empty)}else{totals.items.forEach(p=>{const line=node('div','cart-line'),title=node('div'),h=node('h3','',p.name),small=node('small','',p.size),qty=node('input','qty'),amount=node('strong','',dollars(promoPrice(p)*p.qty)),remove=node('button','','Remove');qty.type='number';qty.min='1';qty.max='99';qty.value=p.qty;qty.setAttribute('aria-label','Quantity of '+p.name);qty.addEventListener('change',()=>{const number=Number(qty.value);if(!Number.isInteger(number)||number<1||number>99){qty.value=p.qty;qty.reportValidity();return}const cart=readCart();cart[p.id]=number;writeCart(cart);renderCart()});remove.type='button';remove.addEventListener('click',()=>{const cart=readCart();delete cart[p.id];writeCart(cart);renderCart()});title.append(h,small);line.append(title,qty,amount,remove);root.append(line)})}
-const summary=document.getElementById('cartTotals');if(!summary)return;summary.replaceChildren();const rows=[['Original total',dollars(totals.original),''],['Grand opening savings (25%)','−'+dollars(totals.discount),'discount-row'],['Discounted subtotal',dollars(totals.subtotal),''],['Estimated Nevada sales tax',totals.tax===null?'Calculated after location review':dollars(totals.tax),''],['Estimated total',totals.total===null?'To be confirmed':dollars(totals.total),'final']];rows.forEach(([name,value,cls])=>{const row=node('div','totals-row '+cls);row.append(node('span','',name),node('strong','',value));summary.append(row)})}
-function getInquiryBody(form){const t=getTotals();const fields=new FormData(form);return ['VITAL HOUSE — NONBINDING PRODUCT INQUIRY','','CONTACT DETAILS',`Name: ${fields.get('name')||''}`,`Email: ${fields.get('email')||''}`,`Phone: ${fields.get('phone')||''}`,`Organization: ${fields.get('organization')||'Not provided'}`,'','ITEMS',...t.items.map(p=>`• ${p.name} — ${p.size}; Qty ${p.qty}; Original/unit ${dollars(cents(p.price))}; 25%-off/unit ${dollars(promoPrice(p))}; Discounted line total ${dollars(promoPrice(p)*p.qty)}`),'',`Original subtotal: ${dollars(t.original)}`,`Grand opening savings (25%): -${dollars(t.discount)}`,`Discounted subtotal: ${dollars(t.subtotal)}`,`Estimated tax jurisdiction: ${t.region==='outside'?'Outside Nevada / requires review':(t.region==='Carson City'?'Carson City, Nevada':t.region+' County, Nevada')}`,`Estimated Nevada sales tax: ${t.tax===null?'To be confirmed':dollars(t.tax)}`,`Estimated total including tax: ${t.total===null?'To be confirmed':dollars(t.total)}`,'','Additional questions:',String(fields.get('questions')||'None'),'','THIS IS AN INQUIRY ONLY: Not an agreement or commitment to purchase. No order was accepted and no payment was collected. Product availability, buyer eligibility, shipping and final taxes must be confirmed independently. Research use only; not for human or veterinary use.'].join('\n')}
-function validPhone(form){const phone=form.querySelector('[name=phone]');if(!phone)return true;const digits=phone.value.replace(/\D/g,'');const good=digits.length>=10&&digits.length<=15;phone.setCustomValidity(good?'':'Please enter a valid phone number (at least 10 digits).');return good}
-function initCart(){const box=document.getElementById('cartItems');if(!box)return;document.getElementById('taxRegion').addEventListener('change',renderCart);renderCart();const form=document.getElementById('inquiryForm'),status=document.getElementById('mailStatus');form.querySelector('[name=phone]')?.addEventListener('input',()=>validPhone(form));form.addEventListener('submit',event=>{event.preventDefault();if(!validPhone(form)||!form.reportValidity())return;if(!getCartItems().length){status.textContent='Please add at least one item first.';return}const body=getInquiryBody(form),subject='Vital House — Nonbinding Product Inquiry';status.textContent='Your email application should open with the inquiry. Review it and press Send in your email app. If no email opens, click “Copy inquiry details.”';window.location.href='mailto:vitalhouseresearch@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body)});document.getElementById('copyInquiry').addEventListener('click',async()=>{if(!validPhone(form)||!form.reportValidity())return;if(!getCartItems().length){status.textContent='Please add at least one item first.';return}const body=getInquiryBody(form);try{await navigator.clipboard.writeText(body);status.textContent='Inquiry copied. Paste it into an email to vitalhouseresearch@gmail.com.'}catch{const area=node('textarea');area.value=body;area.style.width='100%';area.style.height='140px';area.setAttribute('aria-label','Copy this inquiry text');status.replaceChildren(node('span','','Select and copy the inquiry below, then email it to vitalhouseresearch@gmail.com.'),area);area.focus();area.select()}})}
-document.addEventListener('DOMContentLoaded',()=>{initNavigation();renderCatalog();renderShop();initCart()});
+const VH = (() => {
+  const products = [
+    {id:'retatrutide',name:'Retatrutide',dose:'30 mg',price:150,description:'Investigational multi-receptor peptide referenced in metabolic-signaling research.'},
+    {id:'tirzepatide',name:'Tirzepatide',dose:'30 mg',price:130,description:'Dual-receptor peptide studied in laboratory research on metabolic signaling.'},
+    {id:'wolverine',name:'Wolverine',dose:'5/5 mg',price:80,description:'Combination research blend containing BPC-157 and TB-500; component pathways remain under investigation.'},
+    {id:'nad',name:'NAD+',dose:'1,000 mg',price:85,description:'Coenzyme used in laboratory work involving cellular energy and redox reactions.'},
+    {id:'ghk',name:'GHK-Cu',dose:'100 mg',price:50,description:'Copper-binding peptide studied in laboratory models of extracellular-matrix signaling.'},
+    {id:'mt2',name:'MT2',dose:'10 mg',price:50,description:'Investigational melanocortin-pathway research peptide.'},
+    {id:'klow',name:'KLOW',dose:'80 mg',price:150,description:'Multi-component experimental research blend; composition and documentation should be reviewed before inquiry.'},
+    {id:'glutathione',name:'Glutathione',dose:'1,500 mg',price:65,description:'Tripeptide used in biochemical research on oxidative and reduction reactions.'},
+    {id:'motsc',name:'MOTS-C',dose:'10 mg',price:50,description:'Mitochondria-derived peptide studied in cellular-signaling research.'},
+    {id:'ss31',name:'SS-31',dose:'10 mg',price:65,description:'Investigational peptide studied in models of mitochondrial function.'},
+    {id:'tesamorelin',name:'Tesamorelin',dose:'10 mg',price:100,description:'Peptide analog used in research on growth-hormone-releasing hormone signaling.'},
+    {id:'selank',name:'Selank',dose:'10 mg',price:40,description:'Investigational peptide studied in neurobiological laboratory models.'},
+    {id:'semax',name:'Semax',dose:'10 mg',price:40,description:'Investigational peptide used in laboratory research on neural signaling.'},
+    {id:'pinealon',name:'Pinealon',dose:'10 mg',price:50,description:'Short-chain peptide explored in preclinical cell-signaling research.'},
+    {id:'igf1',name:'IGF-1',dose:'1 mg',price:100,description:'Growth-factor protein relevant to laboratory research on cell growth and signaling.'}
+  ];
+  const countyRates = {
+    'Clark':.08375,'Washoe':.08265,'White Pine':.07725,'Carson City':.076,'Churchill':.076,'Storey':.076,
+    'Nye':.076,'Douglas':.071,'Elko':.071,'Lander':.071,'Lincoln':.071,'Lyon':.071,
+    'Pershing':.071,'Esmeralda':.0685,'Eureka':.0685,'Humboldt':.0685,'Mineral':.0685
+  };
+  const discount = .25;
+  const storageKey = 'vital_house_cart_v4';
+  const $ = (id) => document.getElementById(id);
+  const money = amount => '$' + Number(amount).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const safe = s => String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  function loadCart(){try{const data=JSON.parse(localStorage.getItem(storageKey)||'{}');if(!data||typeof data!=='object'||Array.isArray(data))return {};const out={};for(const p of products){const q=Number(data[p.id]);if(Number.isFinite(q)&&q>0)out[p.id]=Math.min(99,Math.floor(q));}return out;}catch{return {};}}
+  let cart = loadCart();
+  function saveCart(){try{localStorage.setItem(storageKey,JSON.stringify(cart));}catch{} updateCount();}
+  function updateCount(){let count=Object.values(cart).reduce((a,b)=>a+b,0);for(const el of document.querySelectorAll('.cart-count')){el.textContent=String(count);el.setAttribute('aria-label',count+' products in inquiry cart');}}
+  function add(id, qty){if(!products.some(x=>x.id===id))return;const q=Math.max(1,Math.min(99,Math.floor(Number(qty)||1)));cart[id]=Math.min(99,(cart[id]||0)+q);saveCart();}
+  function setQty(id,qty){if(!products.some(x=>x.id===id))return;const q=Math.max(0,Math.min(99,Math.floor(Number(qty)||0)));if(q===0)delete cart[id];else cart[id]=q;saveCart();renderCart();}
+  function entries(){return products.filter(p=>cart[p.id]>0).map(p=>({...p,qty:cart[p.id]}));}
+  function totals(rate){const originalCents=entries().reduce((sum,p)=>sum+Math.round(p.price*100)*p.qty,0);const discountedCents=Math.round(originalCents*(1-discount));const savingsCents=originalCents-discountedCents;const taxCents=Math.round(discountedCents*rate);return {original:originalCents/100,savings:savingsCents/100,discounted:discountedCents/100,tax:taxCents/100,total:(discountedCents+taxCents)/100};}
+  function renderCatalog(){const mount=$('catalog-list');if(!mount)return;mount.innerHTML=products.map((p,i)=>`<article class="catalog-row"><span class="number">${String(i+1).padStart(2,'0')}</span><h2 class="compound">${safe(p.name)}</h2><p class="description">${safe(p.description)}</p></article>`).join('');}
+  function renderShop(){const mount=$('shop-grid');if(!mount)return;mount.innerHTML=products.map(p=>`<article class="product-card"><div class="product-name">${safe(p.name)}</div><div class="product-dose">${safe(p.dose)}</div><div class="price-line"><span class="price-was">${money(p.price)}</span><span class="price-now">${money(p.price*.75)}</span></div><div class="qty-line"><label for="qty-${p.id}">Qty</label><input type="number" min="1" max="99" value="1" id="qty-${p.id}" inputmode="numeric" aria-label="Quantity of ${safe(p.name)}" /></div><button class="btn btn-primary btn-small add-button" data-id="${p.id}" type="button">Add to cart +</button><div class="card-added" id="msg-${p.id}" role="status"></div></article>`).join('');mount.addEventListener('click',e=>{const btn=e.target.closest('.add-button');if(!btn)return;const id=btn.dataset.id;const q=$('qty-'+id).value;add(id,q);$('msg-'+id).textContent='Added to cart ✓';btn.textContent='Added ✓';setTimeout(()=>{btn.textContent='Add to cart +'},1300)});}
+  function renderCart(){const mount=$('cart-lines');if(!mount)return;const lines=entries();const empty=$('empty-cart');const actions=$('cart-actions');if(lines.length===0){mount.innerHTML='';empty.hidden=false;actions.hidden=true;}else{empty.hidden=true;actions.hidden=false;mount.innerHTML=lines.map(p=>`<article class="cart-line"><img src="vial-generic.svg" alt="Decorative vial illustration"/><div><div class="line-title">${safe(p.name)}</div><div class="line-dose">${safe(p.dose)}</div></div><div class="line-controls" aria-label="Quantity of ${safe(p.name)}"><button type="button" data-act="minus" data-id="${p.id}" aria-label="Decrease ${safe(p.name)}">−</button><output>${p.qty}</output><button type="button" data-act="plus" data-id="${p.id}" aria-label="Increase ${safe(p.name)}">+</button></div><div class="line-total">${money(p.price*.75*p.qty)}</div><button class="remove" type="button" data-act="remove" data-id="${p.id}" aria-label="Remove ${safe(p.name)}">×</button></article>`).join('');}
+    updateTotals();
+  }
+  function updateTotals(){const selectedCounty=$('tax-county')?.value||'Clark';const rate=countyRates[selectedCounty]??.08375;const t=totals(rate);for(const [id,value] of Object.entries({'original-total':t.original,'savings-total':t.savings,'discounted-total':t.discounted,'tax-total':t.tax,'grand-total':t.total})){if($(id))$(id).textContent=(id==='savings-total'?'-':'')+money(value);}if($('tax-rate-label'))$('tax-rate-label').textContent=(rate*100).toFixed(rate===.08375?3:rate===.08265?3:rate===.07725?3:2)+'%';const submit=$('submit-inquiry');if(submit)submit.disabled=entries().length===0;}
+  function initCart(){if(!$('cart-lines'))return;const sel=$('tax-county');if(sel){sel.innerHTML=Object.entries(countyRates).sort((a,b)=>a[0].localeCompare(b[0])).map(([name,rate])=>`<option value="${name}" ${name==='Clark'?'selected':''}>${name==='Carson City'?'Carson City':name+' County'} — ${(rate*100).toFixed(3).replace(/0+$/,'').replace(/\.$/,'')}%</option>`).join('');sel.addEventListener('change',updateTotals);}
+   $('cart-lines').addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const qty=cart[b.dataset.id]||0;setQty(b.dataset.id,b.dataset.act==='plus'?qty+1:b.dataset.act==='minus'?qty-1:0);});
+   $('clear-cart').addEventListener('click',()=>{cart={};saveCart();renderCart();});
+   const form=$('inquiry-form');form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity()||!entries().length)return;const body=makeEmail();const mailto='mailto:vitalhouseresearch@gmail.com?subject='+encodeURIComponent('Vital House - Research Availability Inquiry')+'&body='+encodeURIComponent(body);$('inquiry-status').classList.add('visible');$('inquiry-status').textContent='Your email app should open with the inquiry prepared. You must press Send in your email app; nothing has been submitted automatically.';window.location.href=mailto;});
+   $('copy-inquiry').addEventListener('click',async()=>{if(!form.reportValidity()||!entries().length)return;const body=makeEmail();try{await navigator.clipboard.writeText('To: vitalhouseresearch@gmail.com\nSubject: Vital House - Research Availability Inquiry\n\n'+body);$('inquiry-status').classList.add('visible');$('inquiry-status').textContent='Copied. Paste the inquiry into an email addressed to vitalhouseresearch@gmail.com and send it.';}catch{const status=$('inquiry-status');status.classList.add('visible');status.textContent='Automatic copying was unavailable. Use the Send Inquiry button to open your email program.';}});
+   renderCart();
+  }
+  function makeEmail(){const f=$('inquiry-form');const county=$('tax-county').value;const rate=countyRates[county];const t=totals(rate);const lines=entries();return [
+    'VITAL HOUSE — NONBINDING RESEARCH PRODUCT INQUIRY',
+    'This is a request for availability and information, NOT a purchase, order acceptance, payment agreement, or commitment.',
+    '', 'CONTACT',
+    'Name: '+f.elements.fullName.value.trim(),
+    'Email: '+f.elements.email.value.trim(),
+    'Phone: '+f.elements.phone.value.trim(),
+    'Organization (optional): '+(f.elements.organization.value.trim()||'Not provided'),
+    'Nevada destination county: '+county,
+    '', 'PRODUCTS',
+    ...lines.map(p=>`${p.name} (${p.dose}) × ${p.qty} | Original: ${money(p.price*p.qty)} | 25%-off estimate: ${money(p.price*.75*p.qty)}`),
+    '', 'ESTIMATE (NO PAYMENT REQUESTED)',
+    'Original subtotal: '+money(t.original),
+    'Grand-opening discount (25%): -'+money(t.savings),
+    'Discounted subtotal: '+money(t.discounted),
+    'Estimated Nevada sales tax ('+county+', '+(rate*100).toFixed(3)+'%): '+money(t.tax),
+    'ESTIMATED TOTAL: '+money(t.total),
+    'Shipping or additional charges, if applicable, are not included. All pricing, taxability, eligibility and availability subject to review.',
+    '', 'ADDITIONAL QUESTIONS / MESSAGE',f.elements.message.value.trim()||'(None)',
+    '', 'Customer acknowledged that this inquiry is nonbinding and that no transaction or payment has been initiated.',
+    'Contact details are provided only for responding to this inquiry, not for sale or unsolicited marketing.'
+  ].join('\n');}
+  function initMenu(){const toggle=$('menu-toggle'),nav=$('main-nav');if(toggle&&nav){toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});}}
+  document.addEventListener('DOMContentLoaded',()=>{initMenu();updateCount();renderCatalog();renderShop();initCart();});
+  return {products,add,totals};
+})();
