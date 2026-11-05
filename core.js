@@ -14,8 +14,10 @@
     return products.reduce((sum,p) => {
       const quantity = cart[p.id] || 0;
       sum.count += quantity; sum.subtotal += quantity*p.price;
+      sum.originalSubtotal += quantity*(p.originalPrice || p.price);
+      sum.savings += quantity*((p.originalPrice || p.price)-p.price);
       return sum;
-    },{count:0,subtotal:0});
+    },{count:0,subtotal:0,originalSubtotal:0,savings:0});
   }
   const api = {sanitizeCart,totals};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

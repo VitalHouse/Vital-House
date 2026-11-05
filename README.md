@@ -1,94 +1,38 @@
-# Vital House website
+# Vital House — Original Design / Grand Opening
 
-A portable, dependency-free website coded to closely follow the supplied cream, neon yellow, turquoise, and black mockup. The **original supplied logo is included byte-for-byte**, displayed at its natural aspect ratio with no crop, redraw, filter, recoloring, or transparency conversion.
+This version brings the original Coming Soon artwork into the functional Vital House website. The main logo from the original artwork is displayed using the original source image. The separate uploaded logo file is also retained byte-for-byte. Grand Opening uses custom brush-painted lettering with an accessible heading and image alternative text. An edited copy of the background removes the Coming Soon lettering and the former human-health claim from the hero; original artwork is retained separately.
 
-## What works
+## Included
 
-- Responsive home, research catalog, shop, inquiry cart, contact, FAQ, and policy views.
-- All 15 reference listings and nominal vial contents from the supplied design.
-- Search, listing-type filters, price/name sorting, product detail dialogs.
-- Add/remove items, quantity controls (1–99), integer-cent calculations, and a persistent browser-local cart.
-- Validated nonbinding inquiry form and a downloadable text inquiry.
-- Optional email draft after a verified business inbox is set in `config.js`.
-- Keyboard navigation, focus handling, semantic labels, modal details, reduced-motion support.
-- Local fonts and assets; no CDN, build step, package installation, tracking scripts, or API keys.
+- Grand-opening home page in the original cream, neon yellow, turquoise and black style.
+- 15-item research reference catalog with brief compound descriptions, a research-only statement on each listing, scientific references, search, filters and sorting.
+- Original prices from the supplied photo, a 25% reduction applied once, product detail dialogs and a persistent inquiry cart. Quantity selectors support 1–99 per product before adding.
+- Validated, downloadable research inquiries and email drafts to vitalhouseresearch@gmail.com; contact, FAQ and policy views.
+- Click-to-call business number: 702-739-4502.
+- Local fonts and responsive layouts. No build step or external scripts required.
 
-## Important scope
+## Open and upload
 
-This is a **functional catalog and inquiry website, not an operational sales checkout**. Prices and nominal contents are unverified examples transcribed from the mockup. It accepts no orders, payments, taxes, or shipping requests. No real inventory, customer account, email delivery service, or fulfillment system is connected.
+Extract this ZIP. index.html is at the top level, without an extra enclosing website folder. Open it to preview the site, or serve this folder locally with `python3 -m http.server 8080`.
 
-The 25% promotional strikethroughs, consumer wellness tagline/photo, benefit descriptions, quality-assurance claims, automatic Nevada tax estimate, and “all sales final” language were not carried over. No evidence was supplied to support those claims or policies. A research disclaimer is not a legal authorization to sell. See `COMPLIANCE.md` before a sales launch.
+Upload the extracted contents to your GitHub repository, preserving the assets folder. GitHub supports folders. Use GitHub for source code and connect the repository to a commercial host that permits your business and products. GitHub Pages is not intended or permitted for running an online business or ecommerce site: https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#pages
 
-## Preview on your computer
+For a static host, choose no build command and publish the repository root. Only index.html, styles.css, config.js, products.js, core.js, app.js and assets/ need to be public.
 
-1. Extract this ZIP.
-2. Open `index.html` in a modern browser. This site uses regular deferred scripts and relative asset paths, so it can be opened directly.
-3. For the most reliable local-storage and download behavior, use a local server from this folder:
+## Sales launch status
 
-   ```sh
-   python3 -m http.server 8080
-   ```
+This delivery is a functioning catalog and inquiry frontend. It does not accept orders, take payments, verify stock, or transmit inquiries automatically. Original prices and listed vial contents are from the owner-supplied price photo. A 25% grand-opening reduction is displayed on every shop listing and applied once in cart totals. These are nonbinding inquiry estimates, not accepted orders.
 
-4. Open `http://localhost:8080`.
+To open paid online sales, confirm product eligibility, inventory, pricing practices, shipping and return terms, and a payment provider that supports the business. Backend checkout and provider verification must be implemented separately; do not place private keys in these public files.
 
-Cart selections persist in that browser when storage is permitted. Inquiry form entries are not persisted. Test data is not included in the package.
+The business inbox vitalhouseresearch@gmail.com is configured in config.js. The visitor must review and send the draft from their own mail application. Downloads stay on the visitor's device. The original phone number is already configured.
 
-## Add the source to GitHub
+## Verify
 
-1. Create a repository in your GitHub account.
-2. Upload **the files inside this extracted folder** to the repository root. Keep `index.html` at the root.
-3. Include `.github/workflows/check.yml` if you want automatic syntax and cart checks. GitHub’s web uploader may hide dotfolders; use Git or your editor’s source-control tools if needed.
-4. Commit your files. No external dependencies or secrets are needed.
+Run `node --check app.js` and `node --test tests/cart.test.cjs`. The tests cover catalog integrity, corrupted cart restore, quantity limits, every original price from the photo, the 25% reduction, integer-cent totals and exact uploaded logo bytes. Desktop browser checks exercised the brush-lettered homepage, shop pricing, quantity selection, adding multiple units, discount totals, required-form validation and inquiry download. An inquiry with two Retatrutide and three NAD+ units showed $555.00 original subtotal, $138.75 savings and $416.25 discounted subtotal. The email-app handoff could not be tested because the review browser blocks mailto navigation. Customers must have an email app configured, review the prepared draft and send it themselves; no message is sent by the website. Live payments are not connected.
 
-A GitHub repository can hold this code. **Do not use GitHub Pages to run this ecommerce business.** GitHub’s Pages usage limits prohibit using Pages to run an online business, ecommerce site, or site primarily facilitating commercial transactions. No Pages deployment workflow is included. Use a commercial web host whose current terms expressly permit your specific business and products, with the repository as your source.
+The private hosted review copy is separate from any public business domain. Uploading these files to a GitHub repository does not itself publish a sales site.
 
-Primary policy: https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits
+## Assets
 
-No repository was created and no site was deployed to your GitHub account by this delivery.
-
-## Publish the static frontend elsewhere
-
-After selecting an eligible host, upload these public files to its web root, or connect the GitHub repository with no build command:
-
-- `index.html`
-- `styles.css`
-- `config.js`
-- `products.js`
-- `core.js`
-- `app.js`
-- `assets/` (including the font license notices)
-
-All links and assets use relative paths; hash routes support subdirectory hosting without server rewrites. Source docs, tests, and GitHub workflow files need not be served publicly. The `robots` meta tag currently requests no indexing because this is an unverified preview; robots directives are not access control.
-
-## Customize
-
-| File | What to edit |
-|---|---|
-| `config.js` | Verified business email and phone. Leave blank until confirmed. These settings are public. |
-| `products.js` | Reference names, nominal contents, type, note, and illustrative price in integer USD cents. |
-| `styles.css` | Colors, spacing, responsive breakpoints, typography. |
-| `app.js` | View templates and cart/inquiry interactions. |
-| `assets/vital-house-logo-original.png` | Original uploaded logo. Preserve it unchanged. |
-
-To enable the optional **Open email draft** button, set `inquiryEmail` to your real, verified business inbox in `config.js`. The website never sends an email itself. The customer reviews and sends the draft in their own mail app. Long inquiries must be downloaded and attached manually because email links have practical length limits.
-
-Do not put provider secrets or payment keys in client-side files. Do not turn this preview into a sales checkout merely by changing its labels. A legitimate sales launch requires separate legal, operational, server-side, and payment-provider work described in `COMPLIANCE.md`.
-
-## Checks
-
-With Node.js 22 or newer:
-
-```sh
-node --check app.js
-node --test tests/cart.test.cjs
-```
-
-Tests check catalog integrity, corrupted storage handling, quantity limits, exact cart arithmetic, and the original logo’s SHA-256 hash. A supplied-mockup cart example (one Tirzepatide, two NAD+, one Selank) sums to **$255.00**, before any actual applicable tax/shipping. The old mockup’s further 25% subtraction is not repeated: its displayed item prices already reflected its design’s promotional prices.
-
-Verified manually in a browser: desktop home/shop, name search, product details, add to inquiry, quantity changes without losing entered form text, inquiry download, cart restore on refresh, and 390-pixel mobile home/shop/cart layouts. Email sending and live payments were not tested or implemented.
-
-## Assets and rights
-
-The original logo came from the user and is not recreated. Decorative vial illustrations are built in HTML/CSS and are explicitly labeled as illustrations. They are not actual inventory photos or product packaging claims. The home text replaces the mockup’s human-wellness framing.
-
-Bundled Nimbus fonts are from URW Base 35; the arrow-symbol subset derives from DejaVu Sans. Their copyright, license, and embedding notices are included under `assets/FONT-LICENSE-*.txt`. Keep those notices with redistributed assets. No generated artwork or external stock-photo dependency is required.
+Keep the included font license notices. Vial artwork is illustrative packaging, not proof of actual stock or labeling. The altered background was made with image generation from the original supplied artwork; the original-source logo layer remains unaltered. A separate generated transparent asset provides the brush-painted Grand Opening lettering. It is separate from the unchanged logo.

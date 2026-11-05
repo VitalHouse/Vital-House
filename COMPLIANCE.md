@@ -1,6 +1,6 @@
 # Sales launch review notes — U.S. context
 
-Research checked November 4, 2026. This file explains the implementation choices and remaining work; it is not a legal opinion or certification of compliance. State, local, destination-country, product-specific, hosting, and payment rules may also apply.
+Updated November 5, 2026. This file explains the implementation choices and remaining work; it is not a legal opinion or certification of compliance. State, local, destination-country, product-specific, hosting, and payment rules may also apply.
 
 ## The key issue is actual intended use
 
@@ -8,7 +8,7 @@ FDA evaluates the full circumstances surrounding a product and its promotion. Si
 
 FDA specifically warns about consumer sales of unapproved GLP-1 products falsely labeled as research products. Its current guidance states that retatrutide is not a component of an FDA-approved drug and cannot be used in compounding under federal law. The fact that an active ingredient appears in an approved medicine does not mean the reference vial in this design is approved or lawfully marketable as that medicine.
 
-The current build accepts no sales or payments. Reference prices, contents, and product names remain unverified design data. No product-specific legal status is asserted.
+The current build accepts no sales or payments. Original prices and listed contents were supplied by the owner in a price photo. Product identity, stock and batch documentation remain unverified. No product-specific legal status is asserted.
 
 ## Changes made to the supplied concept
 
@@ -19,10 +19,10 @@ The current build accepts no sales or payments. Reference prices, contents, and 
 | 15 named products and nominal contents | Reference listings only; no availability, identity, or composition assurance. |
 | Wolverine and KLOW blends | No invented constituent list; composition explicitly unverified. |
 | Weight, metabolic, cognition, recovery, tanning, skin, longevity, and similar descriptions | Omitted; no human body-function or treatment benefits promoted. |
-| “Warm wellness at home” / healthy consumer lifestyle imagery | Omitted to avoid implying personal human use. |
+| Original “warm wellness at home” branding | Retained in the original supplied artwork, per the requested design. Its consumer-wellness implications require assessment as part of the overall intended-use review; an inquiry-only flow does not resolve that issue. New body-function claims and lifestyle imagery were not added. |
 | Purity, quality assurance, COA or testing badges | No unsupported certifications, values, batch claims, or documents. |
-| 25% opening sale, crossed-out comparison prices | Omitted without evidence of actual regular prices, promotion terms, and dates. |
-| Mockup discounted price numbers | Retained as plainly illustrative examples, not live offers. |
+| 25% grand-opening pricing | Original prices supplied in the owner’s photo; inquiry prices reduced by 25% once. Historical regular-price substantiation and promotion terms remain the owner’s responsibility. No end date or countdown is invented. |
+| Inquiry estimates | Original unit prices, 25% discounted unit prices, quantities, original subtotal, savings and discounted total shown separately. No payment is collected. |
 | Estimated Nevada tax | Omitted; a live system needs destination/product-specific tax treatment. |
 | Consumer checkout | Replaced with nonbinding inquiry preparation; no sales or payment processing. |
 | “All sales final” | Omitted; no sales occur and actual policy has not been established. |
