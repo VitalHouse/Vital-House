@@ -15,9 +15,9 @@ This version brings the original Coming Soon artwork into the functional Vital H
 
 Extract this ZIP. index.html is at the top level, without an extra enclosing website folder. Open it to preview the site, or serve this folder locally with `python3 -m http.server 8080`.
 
-Upload the extracted contents to your GitHub repository, preserving the assets folder. GitHub supports folders. Use GitHub for source code and connect the repository to a commercial host that permits your business and products. GitHub Pages is not intended or permitted for running an online business or ecommerce site: https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#pages
+All website assets now live beside index.html. Upload the extracted files directly to the repository root; no assets folder is required. Use GitHub for source code and connect the repository to a commercial host that permits your business and products. GitHub Pages is not intended or permitted for running an online business or ecommerce site: https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#pages
 
-For a static host, choose no build command and publish the repository root. Only index.html, styles.css, config.js, products.js, core.js, app.js and assets/ need to be public.
+For a static host, choose no build command and publish the repository root. Only index.html, styles.css, config.js, products.js, core.js, app.js and the bundled image and font files need to be public.
 
 ## Sales launch status
 
@@ -29,10 +29,16 @@ The business inbox vitalhouseresearch@gmail.com is configured in config.js. The 
 
 ## Verify
 
-Run `node --check app.js` and `node --test tests/cart.test.cjs`. The tests cover catalog integrity, corrupted cart restore, quantity limits, every original price from the photo, the 25% reduction, integer-cent totals and exact uploaded logo bytes. Desktop browser checks exercised the brush-lettered homepage, shop pricing, quantity selection, adding multiple units, discount totals, required-form validation and inquiry download. An inquiry with two Retatrutide and three NAD+ units showed $555.00 original subtotal, $138.75 savings and $416.25 discounted subtotal. The email-app handoff could not be tested because the review browser blocks mailto navigation. Customers must have an email app configured, review the prepared draft and send it themselves; no message is sent by the website. Live payments are not connected.
+The development source passes JavaScript syntax and cart tests; the upload ZIP contains only top-level files needed for the site and its documentation. Development-source tests cover catalog integrity, corrupted cart restore, quantity limits, every original price from the photo, the 25% reduction, integer-cent totals and exact uploaded logo bytes. Desktop browser checks exercised the brush-lettered homepage, shop pricing, quantity selection, adding multiple units, discount totals, required-form validation and inquiry download. An inquiry with two Retatrutide and three NAD+ units showed $555.00 original subtotal, $138.75 savings and $416.25 discounted subtotal. The email-app handoff could not be tested because the review browser blocks mailto navigation. Customers must have an email app configured, review the prepared draft and send it themselves; no message is sent by the website. Live payments are not connected.
 
 The private hosted review copy is separate from any public business domain. Uploading these files to a GitHub repository does not itself publish a sales site.
 
 ## Assets
 
 Keep the included font license notices. Vial artwork is illustrative packaging, not proof of actual stock or labeling. The altered background was made with image generation from the original supplied artwork; the original-source logo layer remains unaltered. A separate generated transparent asset provides the brush-painted Grand Opening lettering. It is separate from the unchanged logo.
+
+## Fix for the November 5 missing-images issue
+
+The live domain had images and fonts at the repository root, while the website referenced an assets/ subfolder. Those paths returned 404. All HTML, JavaScript and CSS asset references now use root-level filenames.
+
+For the existing vitalhouse.org upload, replace these three files at the repository root: index.html, app.js and styles.css. The already-uploaded images and fonts can stay where they are. For a new installation, upload every extracted file from this ZIP to the repository root. Wait for the host to finish deploying and refresh the page.
